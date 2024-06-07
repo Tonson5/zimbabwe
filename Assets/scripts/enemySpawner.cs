@@ -7,11 +7,12 @@ public class enemySpawner : MonoBehaviour
     public GameObject enemy;
     void Start()
     {
-        InvokeRepeating("spawnEnemy", 5, 10);
+        InvokeRepeating("spawnEnemy", 0, 10);
     }
 
     void spawnEnemy()
     {
         Instantiate(enemy,transform.position,Quaternion.identity);
+        Destroy(gameObject);
     }
 }

@@ -13,11 +13,16 @@ public class ai1 : MonoBehaviour
     public float viewDistance;
     public float attackRange;
     public GameObject bullet;
+    public bool seeker = true;
+    public GameObject bus;
     RaycastHit hit;
     
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        if(Random.Range(0,4) == 1)
+            seeker = false;
+        bus = GameObject.Find("bus");
     }
     void Seek(Vector3 location)
     {
@@ -67,27 +72,61 @@ public class ai1 : MonoBehaviour
             {
                 attacking = false;
             }
-            else 
+            else
             {
                 Seek(target.transform.position);
-
-                if ((target.transform.position - transform.position).magnitude < attackRange && target != null)
+            }
+            if (((target.transform.position - transform.position).magnitude < attackRange && target != null))
+            {
+                if (attacking && shootable)
                 {
-                    if (attacking && shootable)
-                    {
-                        transform.LookAt(target.transform.position);
-                        
-                        StartCoroutine(Shoot());
-                    }
+                    transform.LookAt(target.transform.position);
 
+                    StartCoroutine(Shoot());
                 }
+
             }
             
+
+
 
         }
         else
         {
-            Wander();
+            if (seeker)
+            {
+                Seek(bus.transform.position);
+                if (Physics.Raycast(transform.position, transform.forward, out hit, viewDistance * 2f) == true && hit.collider.gameObject.CompareTag("Player"))
+                {
+
+                    attacking = true;
+                    target = hit.collider.gameObject;
+                }
+                Debug.DrawRay(transform.position, transform.forward * viewDistance * 2f, Color.blue, 0.1f);
+                if (Physics.Raycast(transform.position, transform.forward + -transform.right, out hit, viewDistance) == true && hit.collider.gameObject.CompareTag("Player"))
+                {
+                    attacking = true;
+                    target = hit.collider.gameObject;
+                }
+                Debug.DrawRay(transform.position, transform.forward + -transform.right * viewDistance, Color.blue, 0.1f);
+                if (Physics.Raycast(transform.position, transform.forward + transform.right, out hit, viewDistance) == true && hit.collider.gameObject.CompareTag("Player"))
+                {
+                    attacking = true;
+                    target = hit.collider.gameObject;
+                }
+                Debug.DrawRay(transform.position, transform.forward + transform.right * viewDistance, Color.blue, 0.1f);
+                if ((bus.transform.position - transform.position).magnitude < attackRange)
+                {
+                    if (shootable)
+                    {
+                        transform.LookAt(bus.transform.position);
+
+                        StartCoroutine(Shoot());
+                    }
+                }
+            }
+            else
+                Wander();
         }
 
     }
@@ -95,7 +134,7 @@ public class ai1 : MonoBehaviour
     {
         shootable = false;
         yield return new WaitForSeconds(Random.Range(0,0.5f));
-        Instantiate(bullet, transform.position + transform.forward, transform.rotation);
+        Instantiate(bullet, transform.position + transform.forward / 2, transform.rotation);
         yield return new WaitForSeconds(Random.Range(0.1f, 1f));
         shootable = true;
     }

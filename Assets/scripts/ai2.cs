@@ -90,7 +90,7 @@ public class ai2 : MonoBehaviour
     {
         shootable = false;
         yield return new WaitForSeconds(Random.Range(0,0.5f));
-        Instantiate(bullet, transform.position + transform.forward, transform.rotation);
+        Instantiate(bullet, transform.position + transform.forward / 2, transform.rotation);
         yield return new WaitForSeconds(Random.Range(0.1f, 1f));
         shootable = true;
     }

@@ -255,7 +255,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 3
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -281,6 +281,8 @@ MonoBehaviour:
   WanderTarget: {x: 0, y: 0, z: 0}
   attacking: 0
   viewDistance: 5
-  attackRange: 3
+  attackRange: 1
   bullet: {fileID: 2079023921052716071, guid: 5fab9c259ba8c6f4baedb83e7915c768, type: 3}
+  seeker: 1
+  bus: {fileID: 0}
   shootable: 1

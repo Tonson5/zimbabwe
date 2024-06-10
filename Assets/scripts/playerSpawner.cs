@@ -17,10 +17,7 @@ public class playerSpawner : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            for (int i = 0; i < amountToSpawn; i++)
-            {
-                
-            }
+            
             
         }
     }

@@ -5,10 +5,11 @@ using UnityEngine;
 public class moveBullet : MonoBehaviour
 {
     private Rigidbody rb;
+    public GameObject loseScreen;
     void Start()
     {
+        loseScreen = GameObject.Find("lose screen");
         rb = GetComponent<Rigidbody>();
-        
         rb.AddRelativeForce(Vector3.forward * 10);
         Destroy(gameObject,2);
     }
@@ -26,6 +27,11 @@ public class moveBullet : MonoBehaviour
             Destroy(collision.gameObject);
             Destroy(gameObject);
         }
-        
+        if (collision.gameObject.CompareTag("bus"))
+        {
+            loseScreen.GetComponent<LoseSceenActivate>().ActivateLoseScreen();
+            Time.timeScale = 0;
+        }
+
     }
 }

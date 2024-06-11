@@ -172,7 +172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wanderRadius: 20
   wanderDistance: 20
-  wanderJitter: 10000
+  wanderJitter: 50
   WanderTarget: {x: 0, y: 0, z: 0}
   attacking: 0
   viewDistance: 5

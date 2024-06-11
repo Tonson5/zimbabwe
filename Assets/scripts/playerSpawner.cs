@@ -7,22 +7,23 @@ public class playerSpawner : MonoBehaviour
     public GameObject player;
     public int amountToSpawn;
     public GameObject spawnpoint;
+    public float cost;
 
     void Start()
     {
         
     }
-
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            
-            
-        }
-    }
     private void OnMouseDown()
     {
-        Instantiate(player, spawnpoint.transform.position, Quaternion.identity);
+        if(cost < GameManager.courage)
+        {
+            GameManager.courage -= cost;
+            for (int i = 0; i < amountToSpawn; i++)
+            {
+                Instantiate(player, spawnpoint.transform.position, Quaternion.identity);
+            }
+            
+        }
+        
     }
 }

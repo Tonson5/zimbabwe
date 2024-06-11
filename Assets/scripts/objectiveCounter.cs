@@ -34,7 +34,6 @@ public class objectiveCounter : MonoBehaviour
         else
         {
             Time.timeScale = 1;
-            
         }
     }
 }

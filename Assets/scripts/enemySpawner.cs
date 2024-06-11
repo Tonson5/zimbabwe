@@ -16,7 +16,7 @@ public class enemySpawner : MonoBehaviour
     {
         amountToSpawn = GameManager.difficulty + 1;
         for (int i = 0; i < amountToSpawn; i++)
-            {
+        {
             Instantiate(enemy, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }

@@ -23,7 +23,8 @@ public class Restart : MonoBehaviour
     public void RestartGame()
     {
         Time.timeScale = 1;
-        GameManager.difficulty = 1;
+        GameManager.difficulty = 0;
+        GameManager.cards = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     public void increaseDifficulty()

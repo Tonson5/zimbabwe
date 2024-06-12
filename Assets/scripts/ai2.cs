@@ -14,6 +14,7 @@ public class ai2 : MonoBehaviour
     public float viewDistance;
     public float attackRange;
     public GameObject bullet;
+    public GameObject explosion;
     RaycastHit hit;
     
     void Start()
@@ -31,6 +32,7 @@ public class ai2 : MonoBehaviour
     }
     void Wander()
     {
+        wanderDistance = Random.Range(10.0f, 25.0f);
         WanderTarget += new Vector3(transform.position.x + Random.Range(-1.0f, 1.0f) * wanderJitter, 0, transform.position.z + Random.Range(-1.0f, 1.0f) * wanderJitter);
         WanderTarget.Normalize();
         WanderTarget *= wanderRadius;
@@ -38,20 +40,20 @@ public class ai2 : MonoBehaviour
         Vector3 targetLocal = WanderTarget + new Vector3(0, 0, wanderDistance);
         Vector3 targetWorld = transform.InverseTransformVector(targetLocal);
         Seek(targetWorld);
-        if (Physics.Raycast(transform.position, transform.forward, out hit, viewDistance * 2f) == true && hit.collider.gameObject.CompareTag("enemy") || hit.collider.gameObject.CompareTag("objective"))
+        if (Physics.Raycast(transform.position, transform.forward, out hit, viewDistance * 2f) == true && hit.collider.gameObject.CompareTag("enemy"))
         {
 
             attacking = true;
             target = hit.collider.gameObject;
         }
         Debug.DrawRay(transform.position, transform.forward * viewDistance * 2f, Color.blue, 0.1f);
-        if (Physics.Raycast(transform.position, transform.forward + -transform.right, out hit, viewDistance) == true && hit.collider.gameObject.CompareTag("enemy") || hit.collider.gameObject.CompareTag("objective"))
+        if (Physics.Raycast(transform.position, transform.forward + -transform.right, out hit, viewDistance) == true && hit.collider.gameObject.CompareTag("enemy"))
         {
             attacking = true;
             target = hit.collider.gameObject;
         }
         Debug.DrawRay(transform.position, transform.forward + -transform.right * viewDistance, Color.blue, 0.1f);
-        if (Physics.Raycast(transform.position, transform.forward + transform.right, out hit, viewDistance) == true && hit.collider.gameObject.CompareTag("enemy") || hit.collider.gameObject.CompareTag("objective"))
+        if (Physics.Raycast(transform.position, transform.forward + transform.right, out hit, viewDistance) == true && hit.collider.gameObject.CompareTag("enemy"))
         {
             attacking = true;
             target = hit.collider.gameObject;
@@ -75,7 +77,14 @@ public class ai2 : MonoBehaviour
             }
             else 
             {
-                Flee(target.transform.position);
+                Seek(target.transform.position);
+
+                if ((target.transform.position - transform.position).magnitude < attackRange)
+                {
+                 Instantiate(explosion,transform.position,transform.rotation);
+                 Destroy(target.gameObject);
+                 Destroy(gameObject);
+                }
             }
             
 

@@ -18,6 +18,6 @@ public class playerCourageCounter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        textMeshProUGUI.text = ("Courage: " + GameManager.courage + "/100");
+        textMeshProUGUI.text = ("Courage: " + MathF.Round(GameManager.courage)  + "/100");
     }
 }

@@ -6,6 +6,7 @@ public class moveBullet : MonoBehaviour
 {
     private Rigidbody rb;
     public GameObject loseScreen;
+    public GameObject zombie;
     void Start()
     {
         loseScreen = GameObject.Find("lose screen");
@@ -24,8 +25,18 @@ public class moveBullet : MonoBehaviour
         Destroy(gameObject);
         if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("enemy") || collision.gameObject.CompareTag("objective"))
         {
-            Destroy(collision.gameObject);
-            Destroy(gameObject);
+            if (collision.gameObject.CompareTag("Player") && collision.gameObject.layer != 7)
+            {
+                Destroy(collision.gameObject);
+                Instantiate(zombie,transform.position,transform.rotation);
+                Destroy(gameObject);
+            }
+            else
+            {
+                Destroy(collision.gameObject);
+                Destroy(gameObject);
+            }
+            
         }
         if (collision.gameObject.CompareTag("bus"))
         {

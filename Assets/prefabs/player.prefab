@@ -170,7 +170,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d1976758f5454c498fc419aa57bedf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wanderRadius: 30
+  wanderRadius: 20
   wanderDistance: 30
   wanderJitter: 10000
   WanderTarget: {x: 0, y: 0, z: 0}

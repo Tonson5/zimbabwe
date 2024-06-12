@@ -119,6 +119,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc68d5369182cce45ab2e82bfb2e6ddb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loseScreen: {fileID: 0}
+  zombie: {fileID: 3965180804273419831, guid: 05f2ab4bb70043e4ba9e858597e3dfd4, type: 3}
 --- !u!54 &305190314854009017
 Rigidbody:
   m_ObjectHideFlags: 0

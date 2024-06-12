@@ -26,6 +26,7 @@ public class ai : MonoBehaviour
     }
     void Wander()
     {
+        wanderDistance = Random.Range(10.0f, 25.0f);
         WanderTarget += new Vector3(transform.position.x + Random.Range(-1.0f, 1.0f) * wanderJitter, 0, transform.position.z + Random.Range(-1.0f, 1.0f) * wanderJitter);
         WanderTarget.Normalize();
         WanderTarget *= wanderRadius;
